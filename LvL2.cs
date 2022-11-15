@@ -11,7 +11,7 @@ using System.IO;
 
 namespace SnakeProt0type_1
 {
-    public partial class Form1 : Form
+    public partial class LvL2 : Form
     {
         private List<Shape> Snake = new List<Shape>(); //List holds information about the snake
         private Shape points = new Shape(); //List holds information about the points
@@ -24,24 +24,29 @@ namespace SnakeProt0type_1
 
         Random rand = new Random();
 
-        bool Left,Right,Up,Down; // Boolean to check for directions 
+        bool Left, Right, Up, Down; // Boolean to check for directions 
 
-        LvL2 L2;
-        StartPage SP;
-        public Form1()
+        Form1 for1;
+        public LvL2(Form1 f11)
         {
-            
+            for1 = f11;
             InitializeComponent();
-            
-            new GameSettings(); //Create an instance of the settings class 
         }
 
-        
+        private void LvL2_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
-
             if (e.KeyCode == Keys.Left && GameSettings.directions != "right") //Allow it to move left and not right
+            {
+                Left = true;
+
+
+            }
+            if (e.KeyCode.ToString() == "a" && GameSettings.directions != "right") //Allow it to move left and not right
             {
                 Left = true;
 
@@ -51,19 +56,37 @@ namespace SnakeProt0type_1
             if (e.KeyCode == Keys.Right && GameSettings.directions != "left") //Allow it to move left and not right
             {
                 Right = true;
-                
+
+
+            }
+            if (e.KeyCode.ToString() == "d" && GameSettings.directions != "left") //Allow it to move left and not right
+            {
+                Right = true;
+
 
             }
             if (e.KeyCode == Keys.Up && GameSettings.directions != "down") //Allow it to move up and not down
             {
                 Up = true;
-                
+
+
+            }
+            if (e.KeyCode.ToString() == "w" && GameSettings.directions != "down") //Allow it to move left and not right
+            {
+                Up = true;
+
 
             }
             if (e.KeyCode == Keys.Down && GameSettings.directions != "up") //Allow it to move up and not down
             {
                 Down = true;
-                
+
+            }
+            if (e.KeyCode.ToString() == "s" && GameSettings.directions != "up") //Allow it to move left and not right
+            {
+                Down = true;
+
+
             }
 
 
@@ -74,22 +97,38 @@ namespace SnakeProt0type_1
             if (e.KeyCode == Keys.Left)
             {
                 Left = false;
-                
+
+            }
+            if (e.KeyCode.ToString() == "a")
+            {
+                Left = false;
             }
             if (e.KeyCode == Keys.Right)
             {
                 Right = false;
-                
+
+            }
+            if(e.KeyCode.ToString() == "d")
+            {
+                Right = false;
             }
             if (e.KeyCode == Keys.Up)
             {
                 Up = false;
-                
+
+            }
+            if(e.KeyCode.ToString() == "w")
+            {
+                Left = false;
             }
             if (e.KeyCode == Keys.Down)
             {
                 Down = false;
-                
+
+            }
+            if(e.KeyCode.ToString() == "s")
+            {
+                Down = false;
             }
 
         }
@@ -99,7 +138,7 @@ namespace SnakeProt0type_1
             RestartGame();
         }
 
-        
+
 
         private void GameTimerEvent(object sender, EventArgs e)
         {
@@ -237,24 +276,7 @@ namespace SnakeProt0type_1
 
         }
 
-        private void SwitchForms_Click(object sender, EventArgs e)
-        {
-            if (SP == null)
-            {
-                SP = new StartPage(this);
-            }
-            SP.Show();
-            Hide();
-        }
-        private void SwitchL2_Click(object sender, EventArgs e)
-        {
-            if (L2 == null)
-            {
-                L2 = new LvL2(this);
-            }
-            L2.Show();
-            Hide();
-        }
+        
 
 
 
@@ -264,11 +286,6 @@ namespace SnakeProt0type_1
         }
 
         private void PicBox_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
         {
 
         }
@@ -304,19 +321,25 @@ namespace SnakeProt0type_1
 
         private void txtUsername_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
-        
+
 
         private void button1_Click_2(object sender, EventArgs e)
         {
-           
+
         }
 
         private void txtScore_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void SwitchForms_Click(object sender, EventArgs e)
+        {
+            for1.Show();
+            Hide();
         }
 
         private void Points()
@@ -341,19 +364,19 @@ namespace SnakeProt0type_1
 
         private void GameOver() // Intialised when you collide head with body 
         {
-            Timer.Stop(); 
+            Timer.Stop();
             StartGame.Enabled = true;
             SwitchForms.Enabled = true;
             //btnSave.Enabled = true;
 
             if (score > highScore) //Updating highscore
             {
-            highScore = score;
+                highScore = score;
 
-            txtHighScore.Text = "High Score: " + highScore;
+                txtHighScore.Text = "High Score: " + highScore;
 
             }
-            
+
 
 
         }
@@ -367,8 +390,5 @@ namespace SnakeProt0type_1
             Console.ReadKey();
         }
 
-
     }
-
-
 }
